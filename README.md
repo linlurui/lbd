@@ -23,8 +23,8 @@
 * 提交参数：
 ```javascript
 {
-  "username": "linlurui",
-  "password": "12345678"
+  "username": "linlurui",    //用户名
+  "password": "12345678"     //密码
 }
 ```
 * 响应参数：
