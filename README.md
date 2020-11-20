@@ -39,7 +39,7 @@
         "modifyOn": "2020-11-16 22:03",
         "modifyBy": 1,
         "type": "",
-        "token": "eyJhbGciOiJIUzI1NiJ9.eyJhbGciOiJIUzI1NiJ9.eyJhbGciOiJIUzI1NiJ9"   //登录成功返回的{token}需要填到headers的Authorization对应的选项值中用于鉴权
+        "token": "eyJhbG.ciOiJIU.zI1NiJ9"   //登录成功返回的{token}需要填到headers的Authorization对应的选项值中用于鉴权
     },
     "message": "OK",
     "status": 0,                          //状态：操作成功返回0
