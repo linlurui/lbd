@@ -78,7 +78,7 @@
 * 请求方式：PUT
 * URL参数：无
 * Headers: 
-** Authorization: {token}
+*** Authorization: {token}
 * 提交参数：
 ```javascript
 {
