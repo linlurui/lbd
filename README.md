@@ -65,16 +65,15 @@
 * 响应参数：
 ```javascript
 {
-    "succ": true,                         //成功
-    "returnCode": "0000",                 //成功返回0000
-    "returnInfo": "商户进件成功",          //消息
-    "returnData": {                       //返回数据节点
+    "data": {
         "mercCd": "10000000123456789001"  //子商户号
-    }
+    },
+    "message": "OK",
+    "status": 0
 }
 ```
 
-### 2. 结算卡绑卡（适用于K010）
+### 2. 结算卡绑卡
 * URL：http://{ip}:{port}/api/lbd/debitcard 
 * 请求方式：PUT
 * URL参数：无
@@ -83,21 +82,86 @@
 * 提交参数：
 ```javascript
 {
-  "idNo":"420814435435345435345",         //身份证号码
-  "idName":"张三",                        //身份证姓名
-  "phoneNo":"18566666666"                 //手机号码
+  "cardNo":"4208144354353454353",         //银行卡号
+  "cardMobile":"18566666666"              //银行卡预留手机号码
 }
 ```
 
 * 响应参数：
 ```javascript
 {
-    "succ": true,                         //成功
-    "returnCode": "0000",                 //成功返回0000
-    "returnInfo": "商户进件成功",          //消息
-    "returnData": {                       //返回数据节点
-        "mercCd": "10000000123456789001"  //子商户号
-    }
+    "message": "OK",
+    "status": 0
 }
 ```
 
+### 3. 支付卡绑卡
+* URL：http://{ip}:{port}/api/lbd/creditcard 
+* 请求方式：PUT
+* URL参数：无
+* Headers: 
+** Authorization: {token}
+* 提交参数：
+```javascript
+{
+  "cardNo":"4208144354353454353",         //银行卡号
+  "cardMobile":"18566666666",             //银行卡预留手机号码
+  "cnlCd": "K010"                         //类型，收款＝"K010", 代还＝"D010"
+}
+```
+
+* 响应参数：
+```javascript
+{
+    "data": {
+      "outOrderNo": "kkkb1f1236aa4f008e00610bab81299a" //订单ID，用于确认绑卡时的{id}参数
+    },
+    "message": "OK",
+    "status": 0
+}
+```
+
+### 4. 支付卡绑卡确认
+* URL：http://{ip}:{port}/api/lbd/creditcard/{id} 
+* 请求方式：PUT
+* URL参数：{id}为支付绑卡时返回的outOrderNo
+* Headers: 
+** Authorization: {token}
+* 提交参数：
+```javascript
+{
+  "smsCode":"123456",         //短信验证码
+}
+```
+
+* 响应参数：
+```javascript
+{
+    "message": "OK",
+    "status": 0
+}
+```
+
+### 5. 支付
+* URL：http://{ip}:{port}/api/lbd/trans 
+* 请求方式：PUT
+* URL参数：{id}为支付绑卡时返回的outOrderNo
+* Headers: 
+** Authorization: {token}
+* 提交参数：
+```javascript
+{
+  "cardNo":"4208144354353454353",         //信用卡卡号
+  "cnlCd": "K010",                        //类型，收款＝"K010", 代还＝"D010"
+  "amount": "120",                        //金额，必须大于100
+  
+}
+```
+
+* 响应参数：
+```javascript
+{
+    "message": "OK",
+    "status": 0
+}
+```
